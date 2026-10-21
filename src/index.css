@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-gold: #d4af37;
+    --color-light-gold: #f5d77a;
+    --color-pale-gold: #fff3c4;
+    --color-deep-gold: #8a6a14;
+    --color-bg: #080808;
+    --color-card: #131216;
+    --color-card-alt: #18171c;
+    --color-text: #f3eee0;
+    --color-muted: #b9b09a;
+    --color-gold-line: rgba(212, 175, 55, 0.35);
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #080808;
+    color: #f3eee0;
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 45%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.015) 0%, transparent 35%, rgba(255, 255, 255, 0.01) 70%, transparent 100%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+/* Metallic gold text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #fff3c4 0%, #f5d77a 30%, #d4af37 70%, #aa8218 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold card with left highlight accent */
+.card-gold {
+  background: linear-gradient(180deg, #16151b 0%, #111014 100%);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-left: 3px solid #d4af37;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 15px -3px rgba(212, 175, 55, 0.05);
+}
+
+.card-gold:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  border-left-color: #f5d77a;
+}
+
+/* Metallic Gold Primary Button with sweep light effect */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5d77a 0%, #d4af37 50%, #aa8218 100%);
+  color: #0b0a08;
+  font-weight: 600;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  min-height: 44px;
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: skewX(-25deg);
+  transition: 0.75s ease;
+}
+
+.btn-gold:hover::after, .btn-gold:active::after {
+  left: 150%;
+}
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+.btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Gold Outline Button */
+.btn-gold-outline {
+  background: transparent;
+  color: #f5d77a;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.btn-gold-outline:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: #d4af37;
+  color: #fff3c4;
+}
+
+/* Form input gold focus glow */
+.input-gold {
+  background-color: #121116;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #f3eee0;
+  border-radius: 0.5rem;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.input-gold:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+/* Single keyframe animation for shiny page titles */
+@keyframes titleShine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shine-title {
+  background: linear-gradient(90deg, #d4af37 0%, #fff3c4 50%, #d4af37 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleShine 2.5s ease-out 1;
+}
+

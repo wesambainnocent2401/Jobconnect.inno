@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <radialGradient id="badgeGlow" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#2a251b" />
+      <stop offset="100%" stop-color="#111014" />
+    </radialGradient>
+    <linearGradient id="goldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff3c4" />
+      <stop offset="35%" stop-color="#f5d77a" />
+      <stop offset="70%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#8a6a14" />
+    </linearGradient>
+    <linearGradient id="goldCase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0b8" />
+      <stop offset="40%" stop-color="#e8be48" />
+      <stop offset="80%" stop-color="#c49726" />
+      <stop offset="100%" stop-color="#8a6a14" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer circular badge with shiny gold border -->
+  <circle cx="50" cy="50" r="46" fill="url(#badgeGlow)" stroke="url(#goldRing)" stroke-width="3.5" />
+  <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1" />
+
+  <!-- Briefcase Handle -->
+  <path d="M38 37 V29 C38 25 62 25 62 29 V37" fill="none" stroke="url(#goldRing)" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Briefcase Body -->
+  <rect x="25" y="37" width="50" height="36" rx="6" fill="url(#goldCase)" filter="drop-shadow(0px 3px 5px rgba(0,0,0,0.5))" />
+  
+  <!-- Briefcase Center Seam / Clasp -->
+  <path d="M25 50 Q50 54 75 50" fill="none" stroke="#684e0c" stroke-width="1.5" />
+  <rect x="46" y="46" width="8" height="8" rx="2" fill="#fff3c4" stroke="#8a6a14" stroke-width="1" />
+
+  <!-- Two small dots connected by a line (Employer & Worker Connected) -->
+  <line x1="36" y1="61" x2="64" y2="61" stroke="#121116" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="36" cy="61" r="3.8" fill="#121116" stroke="#fff3c4" stroke-width="1.2" />
+  <circle cx="64" cy="61" r="3.8" fill="#121116" stroke="#fff3c4" stroke-width="1.2" />
+</svg>

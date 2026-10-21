@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Seeker Portal - JobConnect Kenya</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .portal-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+    .nav-link { color: #f3eee0; text-decoration: none; font-size: 0.875rem; margin-right: 1.25rem; font-weight: 500; }
+    .nav-link:hover, .nav-link.active { color: #f5d77a; }
+    .status-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 11px; font-weight: 600; border: 1px solid rgba(212,175,55,0.4); }
+    .chat-bubble-me { background: linear-gradient(135deg, #d4af37, #f5d77a); color: #000; padding: 0.75rem 1rem; border-radius: 1rem 1rem 0 1rem; font-size: 0.825rem; margin-left: auto; max-width: 75%; margin-bottom: 0.75rem; font-weight: 500; }
+    .chat-bubble-them { background: #1a1921; color: #f3eee0; border: 1px solid rgba(255,255,255,0.1); padding: 0.75rem 1rem; border-radius: 1rem 1rem 1rem 0; font-size: 0.825rem; max-width: 75%; margin-bottom: 0.75rem; }
+    .notif-dropdown { position: absolute; right: 1rem; top: 3.5rem; width: 340px; background: #141318; border: 1px solid rgba(212,175,55,0.4); border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 100; display: none; }
+    .notif-item { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.75rem; cursor: pointer; transition: background 0.2s; }
+    .notif-item:hover { background: rgba(212,175,55,0.1); }
+  </style>
+</head>
+<body>
+  <!-- Header Bar with Logo and Notification Bell -->
+  <header class="header-bar">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <a href="/" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="/logo.svg" alt="JobConnect Logo" style="width: 36px; height: 36px;" />
+        <span class="font-serif text-gold-gradient" style="font-size: 1.25rem; font-weight: 700;">JobConnect</span>
+      </a>
+      <span style="font-size: 11px; background: rgba(212,175,55,0.15); color: #f5d77a; padding: 2px 8px; border-radius: 9999px; border: 1px solid rgba(212,175,55,0.3);">
+        Job Seeker Portal
+      </span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <nav style="display: flex; align-items: center;">
+        <a href="/" class="nav-link">Explore Jobs</a>
+        <a href="#applications" class="nav-link active">My Applications</a>
+        <a href="#messages" class="nav-link">Direct Messages</a>
+      </nav>
+
+      <!-- Real-Time Notification Bell -->
+      <div style="position: relative;">
+        <button id="notif-btn" type="button" style="background: transparent; border: 1px solid rgba(212,175,55,0.3); color: #f5d77a; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; position: relative; display: flex; align-items: center; justify-content: center;">
+          🔔
+          <span id="notif-count" class="notif-badge" style="position: absolute; top: -4px; right: -4px;">2</span>
+        </button>
+
+        <!-- Pop-up Alert Dropdown for Unread Notifications -->
+        <div id="notif-dropdown" class="notif-dropdown">
+          <div style="padding: 0.75rem 1rem; background: #18171e; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+            <strong style="font-size: 12px; color: #f5d77a;">Job Seeker Alerts</strong>
+            <span style="font-size: 10px; color: #b9b09a;">2 unread</span>
+          </div>
+          <div class="notif-item" style="border-left: 3px solid #d4af37;">
+            <div style="font-weight: 600; color: #f5d77a;">Interview Scheduled: Safaricom Digital</div>
+            <div style="color: #b9b09a; margin-top: 2px;">Technical Panel Interview scheduled for 28 Oct at 10:00 AM (Google Meet).</div>
+            <div style="color: #666; font-size: 9px; margin-top: 4px;">Africa/Nairobi Time</div>
+          </div>
+          <div class="notif-item" style="border-left: 3px solid #10b981;">
+            <div style="font-weight: 600; color: #10b981;">Ranked #1 (Currently Selected)</div>
+            <div style="color: #b9b09a; margin-top: 2px;">Your application for Electrical Field Technician is currently ranked #1 of 4 applicants.</div>
+            <div style="color: #666; font-size: 9px; margin-top: 4px;">Score: 100/100</div>
+          </div>
+          <div class="notif-item">
+            <div style="font-weight: 600; color: #f3eee0;">New Matching Job in Nairobi</div>
+            <div style="color: #b9b09a; margin-top: 2px;">Safaricom posted "Electrical Field Technician" matching your verified skills ("wiring, repair").</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/" class="btn-gold" style="font-size: 12px; padding: 0.4rem 1rem; min-height: 36px;">Launch App</a>
+    </div>
+  </header>
+
+  <main class="portal-container">
+    <!-- Top Welcome Banner -->
+    <div style="margin-bottom: 2rem;">
+      <h1 class="font-serif shine-title" style="font-size: 2rem; margin-bottom: 0.25rem;">Candidate Headquarters</h1>
+      <p style="color: #b9b09a; font-size: 0.875rem;">
+        Track your live merit-based application rankings and coordinate directly with employers for interviews.
+      </p>
+    </div>
+
+    <!-- Feature 1: Direct Messaging & Interview Module -->
+    <section id="messages" class="card-gold" style="border-left-color: #f5d77a;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+        <div>
+          <h2 class="font-serif" style="color: #f5d77a; font-size: 1.25rem;">Direct Messaging &amp; Interview Sessions</h2>
+          <p style="color: #b9b09a; font-size: 0.75rem;">Direct channel with hiring managers for shortlisted opportunities.</p>
+        </div>
+        <span class="status-badge" style="color: #10b981; border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.1);">
+          Active Session
+        </span>
+      </div>
+
+      <!-- Scheduled Interview Card -->
+      <div style="background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.4); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <strong style="color: #67e8f9; font-size: 0.875rem;">📅 Scheduled Interview: Electrical Field Technician</strong>
+          <span id="interview-status-badge" style="background: rgba(245,215,122,0.2); color: #f5d77a; border: 1px solid rgba(245,215,122,0.4); padding: 2px 8px; border-radius: 9999px; font-size: 10px; font-weight: 700;">
+            SCHEDULED
+          </span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; font-size: 0.75rem; color: #b9b09a;">
+          <div>Date: <strong style="color: #f3eee0;">28 Oct 2026 at 10:00 AM (EAT)</strong></div>
+          <div>Format: <strong style="color: #f3eee0;">Google Meet / Video Panel</strong></div>
+          <div>Meeting Link: <strong style="color: #f5d77a;">meet.google.com/saf-elec-interview</strong></div>
+        </div>
+        <div style="margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 11px; color: #b9b09a;">Employer: Safaricom Digital Services HR</span>
+          <button id="confirm-btn" type="button" class="btn-gold" style="font-size: 11px; padding: 0.35rem 0.9rem; min-height: 32px;" onclick="confirmAttendance()">
+            ✓ Confirm Attendance
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Chat Stream -->
+      <div style="background: #111015; border: 1px solid rgba(255,255,255,0.06); border-radius: 0.75rem; padding: 1rem; min-height: 240px; max-height: 320px; overflow-y: auto; margin-bottom: 1rem;" id="chat-stream">
+        <div class="chat-bubble-them">
+          <div style="font-size: 10px; color: #d4af37; margin-bottom: 2px;">Safaricom Hiring Team</div>
+          Hello Alice, we reviewed your verified application and 3 years experience at Nairobi Power Grid. Your profile scored 100/100 on our qualification match.
+        </div>
+        <div class="chat-bubble-me">
+          Thank you very much! I am thrilled about this opportunity and ready to discuss how I can maintain telecom power uptime.
+        </div>
+        <div class="chat-bubble-them">
+          <div style="font-size: 10px; color: #d4af37; margin-bottom: 2px;">Safaricom Hiring Team</div>
+          We have scheduled an interview for you on 28 Oct 2026 at 10:00 AM EAT via Google Meet. Looking forward to our conversation!
+        </div>
+      </div>
+
+      <!-- Chat Input Form -->
+      <form onsubmit="sendChatMessage(event)" style="display: flex; gap: 0.5rem;">
+        <input type="text" id="chat-input" class="input-gold" placeholder="Reply to Safaricom recruitment team..." style="flex: 1;" required />
+        <button type="submit" class="btn-gold" style="padding: 0.5rem 1.25rem;">Send Reply</button>
+      </form>
+    </section>
+
+    <!-- Application Status Tracking Section -->
+    <section id="applications" class="card-gold">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+        <h2 class="font-serif" style="color: #f5d77a; font-size: 1.25rem;">My Application Tracking</h2>
+        <span style="font-size: 12px; color: #b9b09a;">Automated Qualification Engine</span>
+      </div>
+
+      <div style="background: #141318; border: 1px solid rgba(212,175,55,0.3); border-radius: 0.75rem; padding: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-size: 10px; color: #10b981; background: rgba(16,185,129,0.15); padding: 2px 8px; border-radius: 9999px; font-weight: 700;">
+            CURRENTLY SELECTED (RANK #1 of 4)
+          </span>
+          <h3 style="font-size: 1.1rem; color: #f3eee0; margin-top: 0.25rem;">Electrical Field &amp; Network Technician</h3>
+          <p style="color: #b9b09a; font-size: 0.75rem;">Safaricom Digital Services · Nairobi CBD · KSh 65,000 - 85,000</p>
+        </div>
+
+        <div style="text-align: right;">
+          <div style="font-size: 11px; color: #b9b09a;">Match Score: <strong style="color: #f5d77a; font-size: 1rem;">100/100</strong></div>
+          <div style="font-size: 10px; color: #10b981;">Excellent match (Skills 50, Exp 30, Edu 20)</div>
+          <a href="/" class="btn-gold-outline" style="font-size: 10px; padding: 0.25rem 0.75rem; margin-top: 0.5rem; min-height: 28px;">View Full Application</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer with Support Number -->
+  <footer style="background: #0b0a0e; border-top: 1px solid rgba(212,175,55,0.25); padding: 2rem 1rem; text-align: center; font-size: 0.75rem; color: #b9b09a; margin-top: 3rem;">
+    <p>© 2026 JobConnect Kenya · Compliant with Kenya Data Protection Act 2019</p>
+    <p style="margin-top: 0.5rem;">
+      Need Help? Contact Safaricom Support &amp; M-Pesa Assistance: 
+      <strong style="color: #f5d77a;"><a href="tel:0710800205" style="color: #f5d77a; text-decoration: none;">0710800205</a></strong>
+    </p>
+  </footer>
+
+  <script>
+    // Notification Toggle
+    const notifBtn = document.getElementById('notif-btn');
+    const notifDropdown = document.getElementById('notif-dropdown');
+    notifBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      notifDropdown.style.display = notifDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', () => {
+      notifDropdown.style.display = 'none';
+    });
+
+    // Chat Send Simulator
+    function sendChatMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const stream = document.getElementById('chat-stream');
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble-me';
+      bubble.textContent = text;
+      stream.appendChild(bubble);
+      stream.scrollTop = stream.scrollHeight;
+      input.value = '';
+    }
+
+    // Confirm Attendance
+    function confirmAttendance() {
+      const badge = document.getElementById('interview-status-badge');
+      const btn = document.getElementById('confirm-btn');
+      badge.textContent = 'ATTENDANCE CONFIRMED ✓';
+      badge.style.background = 'rgba(16,185,129,0.25)';
+      badge.style.color = '#34d399';
+      badge.style.borderColor = 'rgba(16,185,129,0.5)';
+      btn.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employer Portal - JobConnect Kenya</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .portal-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+    .nav-link { color: #f3eee0; text-decoration: none; font-size: 0.875rem; margin-right: 1.25rem; font-weight: 500; }
+    .nav-link:hover, .nav-link.active { color: #f5d77a; }
+    .status-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 11px; font-weight: 600; border: 1px solid rgba(212,175,55,0.4); }
+    .chat-bubble-me { background: linear-gradient(135deg, #d4af37, #f5d77a); color: #000; padding: 0.75rem 1rem; border-radius: 1rem 1rem 0 1rem; font-size: 0.825rem; margin-left: auto; max-width: 75%; margin-bottom: 0.75rem; font-weight: 500; }
+    .chat-bubble-them { background: #1a1921; color: #f3eee0; border: 1px solid rgba(255,255,255,0.1); padding: 0.75rem 1rem; border-radius: 1rem 1rem 1rem 0; font-size: 0.825rem; max-width: 75%; margin-bottom: 0.75rem; }
+    .notif-dropdown { position: absolute; right: 1rem; top: 3.5rem; width: 340px; background: #141318; border: 1px solid rgba(212,175,55,0.4); border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 100; display: none; }
+    .notif-item { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.75rem; cursor: pointer; transition: background 0.2s; }
+    .notif-item:hover { background: rgba(212,175,55,0.1); }
+    .candidate-card { background: #131217; border: 1px solid rgba(212,175,55,0.25); border-left: 3px solid #d4af37; border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  </style>
+</head>
+<body>
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <a href="/" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+        <img src="/logo.svg" alt="JobConnect Logo" style="width: 36px; height: 36px;" />
+        <span class="font-serif text-gold-gradient" style="font-size: 1.25rem; font-weight: 700;">JobConnect</span>
+      </a>
+      <span style="font-size: 11px; background: rgba(212,175,55,0.15); color: #f5d77a; padding: 2px 8px; border-radius: 9999px; border: 1px solid rgba(212,175,55,0.3);">
+        Employer &amp; Recruiter Portal
+      </span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <nav style="display: flex; align-items: center;">
+        <a href="/" class="nav-link">Jobs</a>
+        <a href="#candidates" class="nav-link active">Ranked Candidates</a>
+        <a href="#interviews" class="nav-link">Interviews &amp; Chat</a>
+      </nav>
+
+      <!-- Real-Time Notification Bell for Employer -->
+      <div style="position: relative;">
+        <button id="notif-btn" type="button" style="background: transparent; border: 1px solid rgba(212,175,55,0.3); color: #f5d77a; border-radius: 50%; width: 38px; height: 38px; cursor: pointer; position: relative; display: flex; align-items: center; justify-content: center;">
+          🔔
+          <span id="notif-count" class="notif-badge" style="position: absolute; top: -4px; right: -4px;">1</span>
+        </button>
+
+        <!-- Notification Pop-up Dropdown -->
+        <div id="notif-dropdown" class="notif-dropdown">
+          <div style="padding: 0.75rem 1rem; background: #18171e; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+            <strong style="font-size: 12px; color: #f5d77a;">Employer Alerts</strong>
+            <span style="font-size: 10px; color: #b9b09a;">1 unread</span>
+          </div>
+          <div class="notif-item" style="border-left: 3px solid #10b981;">
+            <div style="font-weight: 600; color: #10b981;">New High-Match Applicant: Alice Wanjiku</div>
+            <div style="color: #b9b09a; margin-top: 2px;">Applied for Electrical Field Technician with 100/100 score. Verified 3 years experience.</div>
+            <div style="color: #666; font-size: 9px; margin-top: 4px;">Top Rank Candidate</div>
+          </div>
+          <div class="notif-item">
+            <div style="font-weight: 600; color: #f3eee0;">Automatic Selection Active</div>
+            <div style="color: #b9b09a; margin-top: 2px;">4 candidates applied for 2 open positions. Top 2 ranked candidates auto-selected.</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/" class="btn-gold" style="font-size: 12px; padding: 0.4rem 1rem; min-height: 36px;">Launch App</a>
+    </div>
+  </header>
+
+  <main class="portal-container">
+    <!-- Top Welcome Banner -->
+    <div style="margin-bottom: 2rem;">
+      <h1 class="font-serif shine-title" style="font-size: 2rem; margin-bottom: 0.25rem;">Recruitment &amp; Interview Center</h1>
+      <p style="color: #b9b09a; font-size: 0.875rem;">
+        Safaricom Digital Services · Manage vacancies, audit qualification rankings, and schedule candidate interviews.
+      </p>
+    </div>
+
+    <!-- Feature 1: Candidate Status Tracking & Shortlist Table -->
+    <section id="candidates" class="card-gold">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+        <div>
+          <h2 class="font-serif" style="color: #f5d77a; font-size: 1.25rem;">Electrical Field Technician Candidates (2 Positions)</h2>
+          <p style="color: #b9b09a; font-size: 0.75rem;">Ranked by qualification score (Skills 50, Experience 30, Education 20).</p>
+        </div>
+        <span class="status-badge" style="color: #10b981; border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.1);">
+          Auto-Selection Active (4 Applicants)
+        </span>
+      </div>
+
+      <!-- Candidate 1 -->
+      <div class="candidate-card" style="border-left-color: #10b981;">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 48px; height: 60px; background: #222; border: 1px solid #d4af37; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #f5d77a; text-align: center;">
+            Passport Photo
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <strong style="color: #f3eee0; font-size: 1rem;">Alice Wanjiku</strong>
+              <span style="font-size: 10px; background: rgba(16,185,129,0.2); color: #34d399; padding: 2px 6px; border-radius: 4px; font-weight: 700;">RANK #1 (SELECTED)</span>
+              <span style="font-size: 10px; background: rgba(212,175,55,0.2); color: #f5d77a; padding: 2px 6px; border-radius: 4px;">SHORTLISTED ✓</span>
+            </div>
+            <p style="color: #b9b09a; font-size: 0.75rem; margin-top: 2px;">
+              Diploma · 3 yrs experience · Skills: wiring, repair, EPRA compliant
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div style="text-align: right; margin-right: 0.5rem;">
+            <div style="font-size: 1.1rem; font-weight: 700; color: #f5d77a;">100/100</div>
+            <div style="font-size: 10px; color: #10b981;">Excellent match</div>
+          </div>
+          <a href="#interviews" class="btn-gold" style="font-size: 11px; padding: 0.4rem 0.9rem; min-height: 32px;">
+            Message &amp; Schedule
+          </a>
+        </div>
+      </div>
+
+      <!-- Candidate 2 -->
+      <div class="candidate-card" style="border-left-color: #10b981;">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 48px; height: 60px; background: #222; border: 1px solid rgba(212,175,55,0.5); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #b9b09a; text-align: center;">
+            Passport Photo
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <strong style="color: #f3eee0; font-size: 1rem;">Dan Kipchoge</strong>
+              <span style="font-size: 10px; background: rgba(16,185,129,0.2); color: #34d399; padding: 2px 6px; border-radius: 4px; font-weight: 700;">RANK #2 (SELECTED)</span>
+            </div>
+            <p style="color: #b9b09a; font-size: 0.75rem; margin-top: 2px;">
+              Masters · 2 yrs experience · Skills: repair, mechatronics
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div style="text-align: right; margin-right: 0.5rem;">
+            <div style="font-size: 1.1rem; font-weight: 700; color: #f5d77a;">75/100</div>
+            <div style="font-size: 10px; color: #10b981;">Good match</div>
+          </div>
+          <button type="button" class="btn-gold-outline" style="font-size: 11px; padding: 0.4rem 0.9rem; min-height: 32px;" onclick="alert('Interview invitation draft prepared for Dan.')">
+            Invite to Interview
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 2: Direct Messaging & Interview Scheduler -->
+    <section id="interviews" class="card-gold" style="border-left-color: #f5d77a;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+        <div>
+          <h2 class="font-serif" style="color: #f5d77a; font-size: 1.25rem;">Candidate Interview &amp; Chat Console</h2>
+          <p style="color: #b9b09a; font-size: 0.75rem;">Conversation with: <strong>Alice Wanjiku (Rank #1)</strong></p>
+        </div>
+        <button type="button" class="btn-gold" style="font-size: 11px; padding: 0.4rem 1rem;" onclick="showScheduler()">
+          + Schedule / Edit Interview
+        </button>
+      </div>
+
+      <!-- Schedule Modal Box -->
+      <div id="schedule-box" style="display: none; background: #1a1922; border: 1px solid #d4af37; border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1.25rem;">
+        <h3 class="font-serif" style="color: #f5d77a; font-size: 1rem; margin-bottom: 0.75rem;">Schedule Official Interview</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-bottom: 0.75rem;">
+          <div>
+            <label style="font-size: 11px; color: #b9b09a; display: block; margin-bottom: 2px;">Date</label>
+            <input type="date" id="int-date" class="input-gold" value="2026-10-28" />
+          </div>
+          <div>
+            <label style="font-size: 11px; color: #b9b09a; display: block; margin-bottom: 2px;">Time (EAT Nairobi)</label>
+            <input type="text" id="int-time" class="input-gold" value="10:00 AM" />
+          </div>
+          <div>
+            <label style="font-size: 11px; color: #b9b09a; display: block; margin-bottom: 2px;">Format</label>
+            <select id="int-format" class="input-gold">
+              <option value="Google Meet / Video">Google Meet / Video</option>
+              <option value="In-person Nairobi Office">In-person Nairobi Office</option>
+              <option value="Phone Interview">Phone Interview</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+          <button type="button" class="btn-gold-outline" style="font-size: 11px; padding: 0.35rem 0.8rem;" onclick="hideScheduler()">Cancel</button>
+          <button type="button" class="btn-gold" style="font-size: 11px; padding: 0.35rem 0.8rem;" onclick="saveInterview()">Save &amp; Notify Candidate</button>
+        </div>
+      </div>
+
+      <!-- Live Chat Stream -->
+      <div style="background: #111015; border: 1px solid rgba(255,255,255,0.06); border-radius: 0.75rem; padding: 1rem; min-height: 220px; max-height: 300px; overflow-y: auto; margin-bottom: 1rem;" id="chat-stream-employer">
+        <div class="chat-bubble-me">
+          Hello Alice, we reviewed your verified application and 3 years experience at Nairobi Power Grid. Your profile scored 100/100 on our qualification match.
+        </div>
+        <div class="chat-bubble-them">
+          <div style="font-size: 10px; color: #d4af37; margin-bottom: 2px;">Alice Wanjiku</div>
+          Thank you very much! I am thrilled about this opportunity and ready to discuss how I can maintain telecom power uptime.
+        </div>
+        <div class="chat-bubble-me">
+          We have scheduled an interview for you on 28 Oct 2026 at 10:00 AM EAT via Google Meet. Looking forward to our conversation!
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <form onsubmit="sendEmployerChatMessage(event)" style="display: flex; gap: 0.5rem;">
+        <input type="text" id="employer-chat-input" class="input-gold" placeholder="Type instructions or response to candidate..." style="flex: 1;" required />
+        <button type="submit" class="btn-gold" style="padding: 0.5rem 1.25rem;">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer with Support Number -->
+  <footer style="background: #0b0a0e; border-top: 1px solid rgba(212,175,55,0.25); padding: 2rem 1rem; text-align: center; font-size: 0.75rem; color: #b9b09a; margin-top: 3rem;">
+    <p>© 2026 JobConnect Kenya · Compliant with Kenya Data Protection Act 2019</p>
+    <p style="margin-top: 0.5rem;">
+      Need Help? Contact Safaricom Support &amp; M-Pesa Assistance: 
+      <strong style="color: #f5d77a;"><a href="tel:0710800205" style="color: #f5d77a; text-decoration: none;">0710800205</a></strong>
+    </p>
+  </footer>
+
+  <script>
+    // Notification Toggle
+    const notifBtn = document.getElementById('notif-btn');
+    const notifDropdown = document.getElementById('notif-dropdown');
+    notifBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      notifDropdown.style.display = notifDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', () => {
+      notifDropdown.style.display = 'none';
+    });
+
+    // Scheduler show/hide
+    function showScheduler() {
+      document.getElementById('schedule-box').style.display = 'block';
+    }
+    function hideScheduler() {
+      document.getElementById('schedule-box').style.display = 'none';
+    }
+    function saveInterview() {
+      const d = document.getElementById('int-date').value;
+      const t = document.getElementById('int-time').value;
+      const f = document.getElementById('int-format').value;
+      alert(`Interview successfully scheduled for ${d} at ${t} (${f}). Candidate has been sent an instant notification!`);
+      hideScheduler();
+    }
+
+    // Chat
+    function sendEmployerChatMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('employer-chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const stream = document.getElementById('chat-stream-employer');
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble-me';
+      bubble.textContent = text;
+      stream.appendChild(bubble);
+      stream.scrollTop = stream.scrollHeight;
+      input.value = '';
+    }
+  </script>
+</body>
+</html>

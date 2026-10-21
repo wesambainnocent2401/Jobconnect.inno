@@ -1,0 +1,7 @@
+{
+  "name": "JobConnect Kenya",
+  "description": "Kenya's premier job-matching platform connecting employers with top talent through automated applicant scoring and selection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
